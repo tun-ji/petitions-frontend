@@ -2,6 +2,9 @@
   import Button from "../../../shared/Button.svelte";
   import InputField from "./InputField.svelte";
   import "@fontsource/syne";
+import SelectField from "./SelectField.svelte";
+import states from "./utils/states";
+import lgaList from "./utils/LGAs";
 
 export let active_step
 let formData = {
@@ -23,6 +26,9 @@ let formData = {
 }
 
 $: formData.petition.fullText = formData.petition.why + ' ' + formData.petition.how
+$: state = formData.creator.creatorState
+$: constituencies = Object.values(lgaList[state])
+
 </script>
 
 <form class="form-container" action="">
@@ -43,7 +49,8 @@ $: formData.petition.fullText = formData.petition.why + ' ' + formData.petition.
     <InputField label={'Email'} bind:value={formData.creator.creatorEmail}/>
     <InputField label={'Phone Number'} bind:value={formData.creator.creatorPhoneNumber}/>
     <!-- <InputField label={'State'} type='checkbox' value={}/> -->
-
+    <SelectField data={states} label='State' name='state' bind:selected={formData.creator.creatorState}/>
+    <SelectField data={constituencies} label='Constituency' name='Constituency' bind:selected={formData.creator.creatorConstituency}/>
     <Button> Sign this Petition </Button>
     
     

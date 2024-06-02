@@ -1,5 +1,5 @@
 <script>
-	export let value, label, description = null, type = 'text';
+	export let value, label, type = 'text';
     import "@fontsource/inter";
 
 	function typeAction(node){
@@ -8,7 +8,7 @@
 </script>
 
 <p class="form-control">
-	{#if label || label && description}
+	{#if label}
     <label a class="label" for>{label}:</label>
 	{/if}
 	<input use:typeAction class="input" bind:value={value}/>
