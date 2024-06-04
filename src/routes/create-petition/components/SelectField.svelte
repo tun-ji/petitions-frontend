@@ -26,6 +26,7 @@
     margin-top: 0.5rem;
     border: 2px solid black;
     border-radius: 0px;
+    background-color: #D9D9D9;
 }
 .input:focus {
     outline: none;
