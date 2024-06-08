@@ -1,44 +1,62 @@
 <script>
   import "@fontsource/syne";
   import "@fontsource/inter";
-  import Button from "../../../shared/Button.svelte";
+  import Button from "$lib/components/Button.svelte";
   import Footer from "../Footer.svelte";
-
+  import { browser } from "$app/environment";
+  import { goto } from "$app/navigation";
   export let data;
+
+  const handleSignPetition = () => {
+    goto(`/petitions/${data.slug}/sign`);
+  }
+
+  if (browser) {
+    window.localStorage.setItem("petition", JSON.stringify(data));
+  }
+
+  const handleShowMapClick = () => {
+    goto(`/petitions/${data.slug}/visualize`);
+  };
+
+  $: console.log(data);
 </script>
 
 <div class="body">
   <div class="main">
     <h3 class="descriptor">Petition</h3>
     <h2 class="petition-name">
-      {data.petition.name}
+      {data.returnedPetition.name}
     </h2>
     <h3 class="small-heading">Full Text</h3>
     <div class="full-text">
-      {data.petition.fullText}
+      {data.returnedPetition.fullText}
     </div>
     <div class="button">
-      <Button>Sign This Petition</Button>
+      <Button on:click={handleSignPetition}>Sign This Petition</Button>
       <a class="link" href="#"> Subscribe for Updates </a>
     </div>
     <div class="sign-info">
       <p class="signature">
-        <span class="signature-count">{data.petition.signatureCount}</span> signatures
+        <span class="signature-count"
+          >{data.returnedPetition.signatureCount}</span
+        >
+        {data.returnedPetition.signatureCount == 1 ? "signature" : "signatures"}
       </p>
-      <a class="link" href="#"> Show on Map </a>
+      <a class="link" on:click={handleShowMapClick}> Show on Map </a>
     </div>
     <div class="info-block">
       <div class="left-col">
         <h3 class="small-heading">Status</h3>
         <p>Under Consideration</p>
         <h3 class="small-heading">Created By</h3>
-        <p>{data.petition.creatorName}</p>
+        <p>{data.returnedPetition.creatorName}</p>
       </div>
       <div class="right-col">
         <h3 class="small-heading">Deadline</h3>
-        <p>{new Date(data.petition.deadline).toDateString()}</p>
+        <p>{new Date(data.returnedPetition.deadline).toDateString()}</p>
         <h3 class="small-heading">Created On</h3>
-        <p>{new Date(data.petition.createdAt).toDateString()}</p>
+        <p>{new Date(data.returnedPetition.createdAt).toDateString()}</p>
       </div>
     </div>
   </div>
@@ -81,7 +99,6 @@
     font-weight: 300;
     margin-bottom: 5%;
     overflow-wrap: break-word;
-
   }
 
   .sign-info {
@@ -121,6 +138,10 @@
     text-decoration: none;
   }
 
+  .link:hover {
+    cursor: pointer;
+  }
+
   .small-heading {
     font-size: 14px;
     font-weight: bold;
@@ -137,7 +158,6 @@
     font-family: "Syne";
     box-shadow: 1px 1px 2px;
     overflow-wrap: break-word;
-
   }
 
   .info-block {
