@@ -2,8 +2,8 @@
   import "@fontsource/syne";
   import "@fontsource/inter";
   import Form from "./components/Form.svelte";
-  import InputField from "./components/InputField.svelte";
-  import Button from "../../shared/Button.svelte";
+  import InputField from "$lib/components/InputField.svelte";
+  import Button from "$lib/components/Button.svelte";
 
   let steps = ["Create", "Sign"];
   let currentActive = 1;
