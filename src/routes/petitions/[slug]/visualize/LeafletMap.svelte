@@ -47,7 +47,6 @@
 
     const accessToken =
       "NFvmfk50j77v9znjjud04wsYRUWHzw4NUzCrtxkrMcSj1oHFyEeJkyS925U2n0Wh";
-    console.log("Setting");
     leaflet
       .tileLayer(
         `https://tile.jawg.io/jawg-light/{z}/{x}/{y}{r}.png?access-token=${accessToken}`,
@@ -69,7 +68,6 @@
 
   onDestroy(async () => {
     if (map) {
-      console.log("Unloading Leaflet map");
       map.remove();
     }
   });

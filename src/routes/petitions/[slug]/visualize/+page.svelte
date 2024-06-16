@@ -9,7 +9,6 @@
   const handleReturnToPetition = () => {
     goto(`/petitions/${data.slug}`);
   };
-  $: console.log(data.signatureData);
 </script>
 
 <main>

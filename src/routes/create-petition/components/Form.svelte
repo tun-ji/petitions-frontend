@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Button from "$lib/components/Button.svelte";
   import InputField from "$lib/components/InputField.svelte";
   import "@fontsource/syne";
@@ -7,6 +7,7 @@
   import lgaList from "$lib/utils/LGAs";
   import { applyAction, deserialize, enhance } from "$app/forms";
   import { invalidateAll } from "$app/navigation";
+    import Modal from "$lib/components/Modal.svelte";
 
   export let active_step;
   let submissionData = {
@@ -26,34 +27,28 @@
       notify: false,
     },
   };
+  let showModal = false
+  let success
+
 
   $: submissionData.petition.fullText =
     submissionData.petition.why + " " + submissionData.petition.how;
   $: state = submissionData.creator.creatorState;
   $: constituencies = Object.values(lgaList[state]);
 
-  async function handleSubmit(event) {
-    const data = new FormData();
-
-    data.append("creator", JSON.stringify(submissionData.creator));
-    data.append("petition", JSON.stringify(submissionData.petition));
-
-    const response = await fetch("?/signPetition", {
-      method: "POST",
-      body: data,
-    });
-
-    const result = deserialize(await response.text());
-
-    if (result.type === "success") {
-      await invalidateAll();
-    }
-
-    applyAction(result);
-  }
 </script>
 
-<form class="form-container" on:submit={handleSubmit}>
+<form class="form-container" method="POST" action="?/createPetition" use:enhance={({formData}) => {
+    formData.append("creator", JSON.stringify(submissionData.creator));
+    formData.append("petition", JSON.stringify(submissionData.petition));
+
+    return async ({result}) => {
+      if (result.data.petition.result == "success") {
+        showModal = true
+        success = true
+      } 
+    }
+}}>
   {#if active_step == "Create"}
     <h2 class="create-header">Create Petition</h2>
     <InputField
@@ -113,6 +108,17 @@
     <Button>Sign this Petition</Button>
   {:else}{/if}
 </form>
+{#if success}
+<Modal bind:showModal>
+  <h2 slot="header"> Petition Created </h2>
+  <p>Please check your email inbox {submissionData.creator.creatorEmail} for next steps!</p>
+</Modal>
+{:else} 
+  <Modal bind:showModal>
+  <h2 slot="header"> Error Creating Petition </h2>
+  <p>Please try refreshing your browser or checking your network connection</p>
+  </Modal>
+{/if}
 
 <style>
   .create-header {

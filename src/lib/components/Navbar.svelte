@@ -1,9 +1,14 @@
 <script>
+    import { goto } from "$app/navigation";
   import "@fontsource/inter";
   export let isHighContrast = false;
+  
+  const handleGoHome = () => {
+    goto('/')
+  }
 </script>
 
-<nav class:nav-high={isHighContrast} class="nav">
+<nav class:nav-high={isHighContrast} class="nav"  on:click={handleGoHome} >
   <img
     src="https://i.postimg.cc/C5vTyNdW/logo.png"
     alt="National Assembly Logo"
@@ -24,6 +29,7 @@
     gap: 1em;
     align-items: center;
     max-width: 100vw;
+    height: 100%;
   }
 
   .nav-high {

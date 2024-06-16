@@ -9,7 +9,7 @@
 
   const handleSignPetition = () => {
     goto(`/petitions/${data.slug}/sign`);
-  }
+  };
 
   if (browser) {
     window.localStorage.setItem("petition", JSON.stringify(data));
@@ -18,8 +18,6 @@
   const handleShowMapClick = () => {
     goto(`/petitions/${data.slug}/visualize`);
   };
-
-  $: console.log(data);
 </script>
 
 <div class="body">

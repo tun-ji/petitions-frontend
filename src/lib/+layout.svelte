@@ -1,17 +1,15 @@
 <script>
-    import { goto } from "$app/navigation";
   import Navbar from "$lib/components/Navbar.svelte";
-
 </script>
 
-<Navbar/>
+<Navbar isHighContrast={true} />
 <div>
   <slot />
 </div>
 
 <style>
   div {
-    background-color: green;
+    background-color: white;
     min-height: 100vh;
     max-width: 100vw;
     padding: 0;

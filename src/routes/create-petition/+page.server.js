@@ -32,5 +32,4 @@ export const actions = {
       console.log(error);
     }
   },
-
 };

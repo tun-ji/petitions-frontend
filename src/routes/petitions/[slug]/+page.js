@@ -3,7 +3,6 @@ export async function load({ fetch, params }) {
 
   const petition = await res.json();
   let returnedPetition = petition.payload;
-  console.log(returnedPetition);
 
   return {
     slug: params.slug,
