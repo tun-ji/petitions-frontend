@@ -7,30 +7,30 @@
   import Footer from "$lib/components/Footer.svelte";
   import InputField from "$lib/components/InputField.svelte";
   import { createSearchStore, searchHandler } from "$lib/stores/search";
-    import { onDestroy } from "svelte";
-    import { goto } from "$app/navigation";
+  import { onDestroy } from "svelte";
+  import { goto } from "$app/navigation";
   export let data;
 
   const searchPetitions = data.returnedPetitions.map((petition) => ({
     ...petition,
-    searchTerms: `${petition?.fullText} + ' ' + ${petition?.name}`
-  }))
+    searchTerms: `${petition?.fullText} + ' ' + ${petition?.name}`,
+  }));
 
   const handlePetitionNav = (slug) => {
-    goto(`/petitions/${slug}`)
-  }
+    goto(`/petitions/${slug}`);
+  };
 
   const handleCreatePetition = () => {
-    goto(`/create-petition`)
-  }
+    goto(`/create-petition`);
+  };
 
-  const searchStore = createSearchStore(searchPetitions)
+  const searchStore = createSearchStore(searchPetitions);
 
-  const unsubscribe = searchStore.subscribe((model) => searchHandler(model))
+  const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
 
   onDestroy(() => {
-    unsubscribe()
-  })
+    unsubscribe();
+  });
 </script>
 
 <Navbar isHighContrast={true} />
@@ -40,10 +40,14 @@
       <h3 class="small-heading">Popular Petitions</h3>
       <div class="popularPetitions">
         {#each data.popularPetitions as petition}
-          <div class="popular-petition" on:click={handlePetitionNav(petition.slug)}>
+          <div
+            class="popular-petition"
+            on:click={handlePetitionNav(petition.slug)}
+          >
             <p class="petition-head">{petition.name}</p>
             <p class="signature-count">
-              {petition.signatureCount } {petition.signatureCount > 1 ? 'signatures': 'signature'}
+              {petition.signatureCount}
+              {petition.signatureCount > 1 ? "signatures" : "signature"}
             </p>
           </div>
         {/each}
@@ -55,17 +59,21 @@
         <input placeholder="Search..." bind:value={$searchStore.search} />
         <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
       </div>
-      {#if $searchStore.search != ''} 
-      <div class="search-results">
-          {#each $searchStore.filtered as petition} 
-            <div on:click={handlePetitionNav(petition.slug)} class="search-result">
+      {#if $searchStore.search != ""}
+        <div class="search-results">
+          {#each $searchStore.filtered as petition}
+            <div
+              on:click={handlePetitionNav(petition.slug)}
+              class="search-result"
+            >
               <h3>{petition.name}</h3>
-              <p>Deadline: {new Date(petition.deadline).toLocaleDateString("en")}</p>
+              <p>
+                Deadline: {new Date(petition.deadline).toLocaleDateString("en")}
+              </p>
             </div>
-          {/each}        
-          
-          </div>
-        {/if}
+          {/each}
+        </div>
+      {/if}
       <div class="petition-actions">
         <p>View all open petitions</p>
         <p>Petitions started near you</p>
@@ -128,7 +136,7 @@
   }
 
   .search-results {
-    font-family: 'Inter';
+    font-family: "Inter";
     background-color: hsla(0, 3%, 74%, 0.968);
     border: solid 2px;
     position: absolute;

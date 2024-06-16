@@ -1,14 +1,14 @@
 <script>
-    import { goto } from "$app/navigation";
+  import { goto } from "$app/navigation";
   import "@fontsource/inter";
   export let isHighContrast = false;
-  
+
   const handleGoHome = () => {
-    goto('/')
-  }
+    goto("/");
+  };
 </script>
 
-<nav class:nav-high={isHighContrast} class="nav"  on:click={handleGoHome} >
+<nav class:nav-high={isHighContrast} class="nav" on:click={handleGoHome}>
   <img
     src="https://i.postimg.cc/C5vTyNdW/logo.png"
     alt="National Assembly Logo"

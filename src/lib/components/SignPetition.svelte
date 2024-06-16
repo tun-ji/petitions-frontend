@@ -11,8 +11,8 @@
   import Modal from "$lib/components/Modal.svelte";
 
   export let data;
-  let showModal = false
-  let success
+  let showModal = false;
+  let success;
 
   let signatory = {
     signatoryName: "",
@@ -30,21 +30,24 @@
 
   $: state = signatory.signatoryState;
   $: constituencies = Object.values(lgaList[state]);
-
-
 </script>
 
 <div class="main">
-  <form class="form-container" method="POST" action="?/signPetition" use:enhance={({formData}) => {
-    formData.append("signatory", JSON.stringify(signatory));
+  <form
+    class="form-container"
+    method="POST"
+    action="?/signPetition"
+    use:enhance={({ formData }) => {
+      formData.append("signatory", JSON.stringify(signatory));
 
-    return async ({result}) => {
-      if (result.data.result.result == "success") {
-        showModal = true
-        success = true
-      }
-    }
-  }}>
+      return async ({ result }) => {
+        if (result.data.result.result == "success") {
+          showModal = true;
+          success = true;
+        }
+      };
+    }}
+  >
     <h3 class="descriptor">Sign Petition</h3>
     <h2 class="petition-name" on:click={handleReturnToPetition}>
       {data.petitionData.name}
@@ -80,16 +83,21 @@
     <Button>Sign this Petition</Button>
   </form>
   {#if success}
-<Modal bind:showModal>
-  <h2 slot="header"> Petition '{data.petitionData.name}' Signed </h2>
-  <p>Share this petition with your friends to make sure you get your Rep's attention</p>
-</Modal>
-{:else} 
-  <Modal bind:showModal>
-  <h2 slot="header"> Error Signing Petition </h2>
-  <p>Please try refreshing your browser or checking your network connection</p>
-  </Modal>
-{/if}
+    <Modal bind:showModal>
+      <h2 slot="header">Petition '{data.petitionData.name}' Signed</h2>
+      <p>
+        Share this petition with your friends to make sure you get your Rep's
+        attention
+      </p>
+    </Modal>
+  {:else}
+    <Modal bind:showModal>
+      <h2 slot="header">Error Signing Petition</h2>
+      <p>
+        Please try refreshing your browser or checking your network connection
+      </p>
+    </Modal>
+  {/if}
 </div>
 
 <style>

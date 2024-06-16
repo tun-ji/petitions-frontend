@@ -1,10 +1,9 @@
 <script>
-    import { goto } from "$app/navigation";
+  import { goto } from "$app/navigation";
   import Navbar from "$lib/components/Navbar.svelte";
-
 </script>
 
-<Navbar/>
+<Navbar />
 <div>
   <slot />
 </div>
