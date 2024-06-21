@@ -1,6 +1,6 @@
 export async function load({ fetch, params }) {
-  const popular = await fetch(`http://localhost:3000/petitions/feed?limit=3`);
-  const petitions = await fetch(`http://localhost:3000/petitions/`);
+  const popular = await fetch(`https://petitions.onrender.com/petitions/feed?limit=3`);
+  const petitions = await fetch(`https://petitions.onrender.com/petitions/`);
 
   let popularPetitions = await popular.json();
   popularPetitions = popularPetitions.payload;

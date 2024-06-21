@@ -8,7 +8,7 @@ export const actions = {
     signatoryData = JSON.parse(signatoryData);
 
     try {
-      const res = await fetch("http://localhost:3000/signatures/sign", {
+      const res = await fetch("https://petitions.onrender.com/signatures/sign", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

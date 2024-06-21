@@ -1,5 +1,5 @@
 export async function load({ fetch, params }) {
-  const res = await fetch(`http://localhost:3000/petitions/${params.slug}`);
+  const res = await fetch(`https://petitions.onrender.com/petitions/${params.slug}`);
 
   let petitionData = await res.json();
   petitionData = petitionData.payload;

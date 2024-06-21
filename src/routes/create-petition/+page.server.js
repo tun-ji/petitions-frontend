@@ -15,7 +15,7 @@ export const actions = {
     };
 
     try {
-      const res = await fetch(`http://localhost:3000/petitions/`, {
+      const res = await fetch(`https://petitions.onrender.com/petitions/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
