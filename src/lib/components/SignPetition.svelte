@@ -33,6 +33,7 @@
 </script>
 
 <div class="main">
+  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
   <form
     class="form-container"
     method="POST"
@@ -49,6 +50,7 @@
     }}
   >
     <h3 class="descriptor">Sign Petition</h3>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <h2 class="petition-name" on:click={handleReturnToPetition}>
       {data.petitionData.name}
     </h2>

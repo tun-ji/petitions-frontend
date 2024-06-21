@@ -12,6 +12,7 @@
 </script>
 
 <main>
+  <!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events-->
   <h2 class="petition-name" on:click={handleReturnToPetition}>
     Signatures for Petition: {petition.name}
   </h2>

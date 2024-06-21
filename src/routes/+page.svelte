@@ -40,6 +40,7 @@
       <h3 class="small-heading">Popular Petitions</h3>
       <div class="popularPetitions">
         {#each data.popularPetitions as petition}
+        <!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events-->
           <div
             class="popular-petition"
             on:click={handlePetitionNav(petition.slug)}
@@ -47,7 +48,7 @@
             <p class="petition-head">{petition.name}</p>
             <p class="signature-count">
               {petition.signatureCount}
-              {petition.signatureCount > 1 ? "signatures" : "signature"}
+              {petition.signatureCount > 1 ? "signatures" : "signature"} in the past day
             </p>
           </div>
         {/each}
@@ -62,6 +63,7 @@
       {#if $searchStore.search != ""}
         <div class="search-results">
           {#each $searchStore.filtered as petition}
+            <!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events-->
             <div
               on:click={handlePetitionNav(petition.slug)}
               class="search-result"

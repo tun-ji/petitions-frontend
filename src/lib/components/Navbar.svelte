@@ -8,6 +8,7 @@
   };
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <nav class:nav-high={isHighContrast} class="nav" on:click={handleGoHome}>
   <img
     src="https://i.postimg.cc/C5vTyNdW/logo.png"

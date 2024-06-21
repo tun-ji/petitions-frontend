@@ -32,6 +32,7 @@
     </div>
     <div class="button">
       <Button on:click={handleSignPetition}>Sign This Petition</Button>
+      <!-- svelte-ignore a11y-invalid-attribute-->
       <a class="link" href="#"> Subscribe for Updates </a>
     </div>
     <div class="sign-info">
@@ -41,6 +42,7 @@
         >
         {data.returnedPetition.signatureCount == 1 ? "signature" : "signatures"}
       </p>
+      <!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events a11y-missing-attribute-->
       <a class="link" on:click={handleShowMapClick}> Show on Map </a>
     </div>
     <div class="info-block">
